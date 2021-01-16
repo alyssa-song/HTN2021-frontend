@@ -19,9 +19,7 @@ class FeaturesTabs extends React.Component {
 
     const {
       className,
-      topOuterDivider,
       bottomOuterDivider,      
-      topDivider,
       bottomDivider,
       hasBgColor,
       invertColor,
@@ -31,7 +29,6 @@ class FeaturesTabs extends React.Component {
 
     const outerClasses = classNames(
       'features-tabs section center-content',
-      topOuterDivider && 'has-top-divider',
       bottomOuterDivider && 'has-bottom-divider',
       hasBgColor && 'has-bg-color',
       invertColor && 'invert-color',
@@ -40,13 +37,12 @@ class FeaturesTabs extends React.Component {
 
     const innerClasses = classNames(
       'features-tabs-inner section-inner',
-      topDivider && 'has-top-divider',
       bottomDivider && 'has-bottom-divider'
     );
 
     const sectionHeader = {
-      title: 'Built exclusively for you',
-      paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
+      title: 'Features',
+      paragraph: 'Here are some features we have.'
     };
 
     return (

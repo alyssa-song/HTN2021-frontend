@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/gated-path"
+  status = 200
+  conditions = {Role = ["registered-user"]}
+  force = true

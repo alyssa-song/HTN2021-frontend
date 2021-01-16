@@ -5,6 +5,7 @@ import ButtonGroup from '../elements/ButtonGroup';
 import Button from '../elements/Button';
 import Image from '../elements/Image';
 import Modal from '../elements/Modal';
+import { Link } from 'react-router-dom';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -14,11 +15,28 @@ const defaultProps = {
   ...SectionSplitProps.defaults
 }
 
+function initNetlifyIdentity(){
+  console.log("initNetlifyIdentity called")
+  const script = document.createElement("script");
+
+  script.src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+  script.async=true;
+
+  document.body.appendChild(script);
+}
+
+function openNetlifyModal(){
+  const netlifyIdentity = window.netlifyIdentity;
+
+  if(netlifyIdentity) netlifyIdentity.open();
+  else console.log("netlifyIdentity not defined")
+}
+
 class HeroSplit extends React.Component {
 
   state = {
     videoModalActive: false
-  }  
+  };
 
   openVideoModal = (e) => {
     e.preventDefault();
@@ -31,6 +49,7 @@ class HeroSplit extends React.Component {
   }  
 
   render() {
+    initNetlifyIdentity();
 
     const {
       className,
@@ -80,18 +99,13 @@ class HeroSplit extends React.Component {
               <div className="split-item">
                 <div className="hero-content split-item-content center-content-mobile reveal-from-top">
                   <h1 className="mt-0 mb-16">
-                    Landing template for startups
+                    Dasamood
                   </h1>
                   <p className="mt-0 mb-32">
-                    Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
+                    Here is a description of our project. 
                   </p>
                   <ButtonGroup>
-                    <Button tag="a" color="primary" href="https://cruip.com/" wideMobile>
-                      Pricing and plans
-                    </Button>
-                    <Button tag="a" color="dark" href="https://cruip.com/" wideMobile>
-                      Learn more
-                    </Button>                    
+                    <Button color="primary" wideMobile onClick={() => { openNetlifyModal() }}>Sign up / Sign in</Button>                
                   </ButtonGroup>
                 </div>
                 <div className="hero-figure split-item-image split-item-image-fill illustration-element-01 reveal-from-bottom">

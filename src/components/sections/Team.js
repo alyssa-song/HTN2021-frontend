@@ -161,57 +161,7 @@ class Team extends React.Component {
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <div className="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="600">
-                <div className="tiles-item-inner">
-                  <div className="team-item-header">
-                    <div className="team-item-image mb-24">
-                      <Image
-                        src={require('./../../assets/images/team-member-05.jpg')}
-                        alt="Team member 05"
-                        width={180}
-                        height={180} />
-                    </div>
-                  </div>
-                  <div className="team-item-content">
-                    <h5 className="team-item-name mt-0 mb-4">
-                      Markus Hasinika
-                    </h5>
-                    <div className="team-item-role text-xs fw-600 mb-8">
-                      Founder & CEO
-                    </div>
-                    <p className="m-0 text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="750">
-                <div className="tiles-item-inner">
-                  <div className="team-item-header">
-                    <div className="team-item-image mb-24">
-                      <Image
-                        src={require('./../../assets/images/team-member-06.jpg')}
-                        alt="Team member 06"
-                        width={180}
-                        height={180} />
-                    </div>
-                  </div>
-                  <div className="team-item-content">
-                    <h5 className="team-item-name mt-0 mb-4">
-                      Markus Hasinika
-                    </h5>
-                    <div className="team-item-role text-xs fw-600 mb-8">
-                      Founder & CEO
-                    </div>
-                    <p className="m-0 text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </div>            
 
             </div>
           </div>

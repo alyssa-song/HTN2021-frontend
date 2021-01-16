@@ -25,8 +25,19 @@ const defaultProps = {
 class Header extends React.Component {
 
   state = {
-    isActive: false
+    isActive: false,
+    demoModalActive: false
   };
+
+  openModal = (e) => {
+    e.preventDefault();
+    this.setState({ demoModalActive: true });
+  }
+
+  closeModal = (e) => {
+    e.preventDefault();
+    this.setState({ demoModalActive: false });
+  }
 
   nav = React.createRef();
   hamburger = React.createRef();
@@ -120,21 +131,17 @@ class Header extends React.Component {
                         'list-reset text-xs',
                         navPosition && `header-nav-${navPosition}`
                       )}>
-                      <li>
-                        <Link to="/secondary/" onClick={this.closeMenu}>Secondary page</Link>
-                      </li>
-                    </ul>
-                    {!hideSignin &&
-                      <ul
-                        className="list-reset header-nav-right"
-                      >
-                        <li>
-                          <Link to="/signup/" className="button button-primary button-wide-mobile button-sm" onClick={this.closeMenu}>Sign up</Link>
-                        </li>
-                      </ul>}
+                    <li>
+                      <Link to="/setup/" onClick={this.closeMenu}>Set Up</Link>
+                    </li>
+                    <li>
+                      <Link to="/my-analytics/" onClick={this.closeMenu}>My Analytics</Link>
+                    </li>
+                  </ul>
                   </div>
                 </nav>
-              </React.Fragment>}
+              </React.Fragment>
+            }
           </div>
         </div>
       </header>
@@ -144,5 +151,10 @@ class Header extends React.Component {
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
+
+const modalFormStyle = {
+  maxWidth: '320px',
+  margin: '0 auto'
+}
 
 export default Header;
