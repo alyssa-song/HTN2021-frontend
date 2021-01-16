@@ -1,9 +1,11 @@
 import React from 'react';
+import {Line} from 'react-chartjs-2'
 import classNames from 'classnames';
 import { SectionProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
 import Tabs, { TabList, Tab, TabPanel } from './../elements/Tabs';
 import Image from '../elements/Image';
+import moment from "moment";
 
 const propTypes = {
   ...SectionProps.types
@@ -45,6 +47,33 @@ class FeaturesTabs extends React.Component {
       paragraph: 'Here are some features we have.'
     };
 
+    const startDate = new Date(2020, 0, 1);
+    const labels = [];
+    for (let i = 0; i < 6; i++) {
+      const date = moment(startDate)
+        .add(i, "days")
+        .format("YYYY-MM-DD");
+      labels.push(date.toString());
+    }
+
+    const data = canvas => {
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      return {
+        backgroundColor: gradient,
+        labels,
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 3,
+            fill: false,
+            borderColor: "#2174ea"
+          }
+        ]
+      };
+    };
+
     return (
       <section
         {...props}
@@ -64,7 +93,7 @@ class FeaturesTabs extends React.Component {
                       height={56} />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
-                    Internal Feedback
+                    Daily
                   </div>
                 </Tab>
                 <Tab tabId="tab-b">
@@ -76,7 +105,7 @@ class FeaturesTabs extends React.Component {
                       height={56} />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
-                    Internal Feedback
+                    Weekly
                   </div>                  
                 </Tab>
                 <Tab tabId="tab-c">
@@ -88,7 +117,7 @@ class FeaturesTabs extends React.Component {
                       height={56} />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
-                    Internal Feedback
+                    Monthly
                   </div>                  
                 </Tab>
                 <Tab tabId="tab-d">
@@ -100,41 +129,21 @@ class FeaturesTabs extends React.Component {
                       height={56} />
                   </div>
                   <div className="text-color-high fw-600 text-sm">
-                    Internal Feedback
+                    Yearly
                   </div>
                 </Tab>                
               </TabList>
               <TabPanel id="tab-a">
-                <Image
-                  className="has-shadow"
-                  src={require('./../../assets/images/features-tabs-image.png')}
-                  alt="Features tabs image 01"
-                  width={896}
-                  height={504} />
+                <Line data={data} />
               </TabPanel>
               <TabPanel id="tab-b">
-                <Image
-                  className="has-shadow"
-                  src={require('./../../assets/images/features-tabs-image.png')}
-                  alt="Features tabs image 02"
-                  width={896}
-                  height={504} />
+                <Line data={data} />
               </TabPanel>
               <TabPanel id="tab-c">
-                <Image
-                  className="has-shadow"
-                  src={require('./../../assets/images/features-tabs-image.png')}
-                  alt="Features tabs image 03"
-                  width={896}
-                  height={504} />
+                <Line data={data} />
               </TabPanel>
               <TabPanel id="tab-d">
-                <Image
-                  className="has-shadow"
-                  src={require('./../../assets/images/features-tabs-image.png')}
-                  alt="Features tabs image 04"
-                  width={896}
-                  height={504} />
+                <Line data={data} />
               </TabPanel>              
             </Tabs>
           </div>

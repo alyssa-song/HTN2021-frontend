@@ -1,7 +1,6 @@
 import React from 'react';
 import HeroSplit from '../components/sections/HeroSplit';
 import FeaturesTiles from '../components/sections/FeaturesTiles';
-import FeaturesTabs from '../components/sections/FeaturesTabs';
 
 class Home extends React.Component {
   render() {
@@ -9,7 +8,6 @@ class Home extends React.Component {
       <React.Fragment>
         <HeroSplit hasBgColor invertColor />
         <FeaturesTiles />
-        <FeaturesTabs topDivider bottomOuterDivider />
       </React.Fragment>
     );
   }
