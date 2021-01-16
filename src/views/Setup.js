@@ -1,10 +1,5 @@
 import React from 'react';
-import HeroSplit from '../components/sections/HeroSplit';
-import FeaturesTiles from '../components/sections/FeaturesTiles';
-import FeaturesTabs from '../components/sections/FeaturesTabs';
 import GenericSection from '../components/sections/GenericSection';
-import Team from '../components/sections/Team';
-import Roadmap from '../components/sections/Roadmap';
 import Image from '../components/elements/Image';
 
 class Home extends React.Component {

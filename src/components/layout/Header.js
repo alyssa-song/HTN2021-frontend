@@ -152,9 +152,4 @@ class Header extends React.Component {
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
 
-const modalFormStyle = {
-  maxWidth: '320px',
-  margin: '0 auto'
-}
-
 export default Header;

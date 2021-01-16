@@ -5,7 +5,6 @@ import ButtonGroup from '../elements/ButtonGroup';
 import Button from '../elements/Button';
 import Image from '../elements/Image';
 import Modal from '../elements/Modal';
-import { Link } from 'react-router-dom';
 
 const propTypes = {
   ...SectionSplitProps.types

@@ -6,7 +6,6 @@ import ScrollReveal from './utils/ScrollReveal';
 // Layouts
 import LayoutDefault from './layouts/LayoutDefault';
 import LayoutAlternative from './layouts/LayoutAlternative';
-import LayoutSignin from './layouts/LayoutSignin';
 
 // Views 
 import Home from './views/Home';

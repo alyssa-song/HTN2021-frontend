@@ -1,5 +1,0 @@
-# If visitor has 'nf_jwt' with role of editor set, let them in.
-/* /my-analytics 200! Role=registered-user
-
-# else redirect back to login
-/* /setup 302!
