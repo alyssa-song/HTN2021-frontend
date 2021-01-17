@@ -20,13 +20,7 @@ class FeaturesTabs extends React.Component {
   render() {
 
     const {
-      className,
-      bottomOuterDivider,      
-      bottomDivider,
-      hasBgColor,
-      invertColor,
-      pushLeft,
-      ...props
+      className, bottomOuterDivider, bottomDivider, hasBgColor, invertColor, pushLeft, ...props
     } = this.props;
 
     const outerClasses = classNames(
@@ -47,16 +41,12 @@ class FeaturesTabs extends React.Component {
       paragraph: 'Here are some features we have.'
     };
 
-    const startDate = new Date(2020, 0, 1);
-    const labels = [];
-    for (let i = 0; i < 6; i++) {
-      const date = moment(startDate)
-        .add(i, "days")
-        .format("YYYY-MM-DD");
-      labels.push(date.toString());
-    }
+    const startDate = new Date();
 
-    const data = canvas => {
+    // query date with startDate, go through all existing hours ()
+    const day = canvas => {
+      const labels = ["12:00AM", "1:00AM", "2:00AM", "3:00AM", "4:00AM", "5:00AM", "6:00AM", "8:00AM", "9:00AM", "10:00AM", "11:00AM",
+        "12:00PM", "1:00PM", "2:00PM", "3:00PM", "4:00PM", "5:00PM", "6:00PM", "8:00PM", "9:00PM", "10:00PM", "11:00PM"];
       const ctx = canvas.getContext("2d");
       const gradient = ctx.createLinearGradient(0, 0, 100, 0);
       return {
@@ -64,8 +54,74 @@ class FeaturesTabs extends React.Component {
         labels,
         datasets: [
           {
-            label: "# of Votes",
+            label: "",
+            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3],
+            borderWidth: 3,
+            fill: false,
+            borderColor: "#2174ea"
+          }
+        ]
+      };
+    };
+
+    const week = canvas => {
+      const labels = []
+      for (let i = 1; i <= 7; i++) {
+        labels.push(moment(startDate).add(i, "days").toString().substr(0, 3));
+      }
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      return {
+        backgroundColor: gradient,
+        labels,
+        datasets: [
+          {
+            label: "",
             data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 3,
+            fill: false,
+            borderColor: "#2174ea"
+          }
+        ]
+      };
+    };
+
+    const month = canvas => {
+      const labels = []
+      const firstDay = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+      const daysInMonth = new Date(startDate.getFullYear(), startDate.getMonth()+1, 0).getDate();
+      for (let i = 0; i < daysInMonth; i++) {
+        const date = moment(firstDay).add(i, "days");
+        labels.push(date.toString().substr(4, 6));
+      }
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      return {
+        backgroundColor: gradient,
+        labels,
+        datasets: [
+          {
+            label: "",
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 3,
+            fill: false,
+            borderColor: "#2174ea"
+          }
+        ]
+      };
+    };
+
+    const year = canvas => {
+      const labels = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      return {
+        backgroundColor: gradient,
+        labels,
+        datasets: [
+          {
+            label: "",
+            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3],
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
@@ -106,7 +162,7 @@ class FeaturesTabs extends React.Component {
                   </div>
                   <div className="text-color-high fw-600 text-sm">
                     Weekly
-                  </div>                  
+                  </div>
                 </Tab>
                 <Tab tabId="tab-c">
                   <div className="features-tabs-tab-image mb-12">
@@ -118,7 +174,7 @@ class FeaturesTabs extends React.Component {
                   </div>
                   <div className="text-color-high fw-600 text-sm">
                     Monthly
-                  </div>                  
+                  </div>
                 </Tab>
                 <Tab tabId="tab-d">
                   <div className="features-tabs-tab-image mb-12">
@@ -131,19 +187,19 @@ class FeaturesTabs extends React.Component {
                   <div className="text-color-high fw-600 text-sm">
                     Yearly
                   </div>
-                </Tab>                
+                </Tab>
               </TabList>
               <TabPanel id="tab-a">
-                <Line data={data} />
+                <Line data={day}/>
               </TabPanel>
               <TabPanel id="tab-b">
-                <Line data={data} />
+                <Line data={week} />
               </TabPanel>
               <TabPanel id="tab-c">
-                <Line data={data} />
+                <Line data={month} />
               </TabPanel>
               <TabPanel id="tab-d">
-                <Line data={data} />
+                <Line data={year} />
               </TabPanel>              
             </Tabs>
           </div>
