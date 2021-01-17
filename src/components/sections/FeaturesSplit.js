@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import classNames from 'classnames';
 import {Bar} from 'react-chartjs-2'
 import { SectionSplitProps } from '../../utils/SectionProps';
@@ -13,6 +14,30 @@ const defaultProps = {
 }
 
 class FeaturesSplit extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { pos:[], neg:[]};
+  }
+
+  componentDidMount() {
+    // make requests and store
+    axios.get('http://127.0.0.1:8000/api/positive/boon')
+      .then(res => {
+        this.setState({ pos: JSON.stringify(res.data) });
+        console.log(this.state.pos);
+      }).catch(function (error) {
+          console.log(error);
+      })
+
+      axios.get('http://127.0.0.1:8000/api/negative/boon')
+      .then(res => {
+        this.setState({ neg: JSON.stringify(res.data) });
+        console.log(this.state.neg);
+      }).catch(function (error) {
+          console.log(error);
+      })
+  }
 
   render() {
 
@@ -60,12 +85,14 @@ class FeaturesSplit extends React.Component {
     const topPositive = canvas => {
       const ctx = canvas.getContext("2d");
       const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      const str = this.state.pos;
+      const posWords = str.toString().substring(1, str.length - 2).split(',');
       return {
         backgroundColor: gradient,
-        labels: ['#1', '#2', '#3', '#4', '#5'],
+        labels: posWords,
         datasets: [{
           label: 'positive words',
-          data: [22, 19, 13, 12, 10],
+          data: [12, 10, 8, 6, 4],
           borderWidth: 1,
           backgroundColor: ['#2174ea', '#2174ea', '#2174ea', '#2174ea', '#2174ea']
         }]
@@ -75,12 +102,14 @@ class FeaturesSplit extends React.Component {
     const topNegative = canvas => {
       const ctx = canvas.getContext("2d");
       const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      const str = this.state.neg;
+      const negWords = str.toString().substring(1, str.length - 2).split(',');
       return {
         backgroundColor: gradient,
-        labels: ['#1', '#2', '#3', '#4', '#5'],
+        labels: negWords,
         datasets: [{
           label: 'negative words',
-          data: [30, 10, 8, 3, 2],
+          data: [12, 10, 8, 6, 4],
           borderWidth: 1,
           backgroundColor: ['#041f3d', '#041f3d', '#041f3d', '#041f3d', '#041f3d']
         }]

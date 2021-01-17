@@ -82,7 +82,7 @@ class FeaturesTabs extends React.Component {
 
     const sectionHeader = {
       title: 'Sentiments',
-      paragraph: JSON.stringify(this.state.chartData)
+      paragraph: ''
     };
 
     const startDate = new Date();
