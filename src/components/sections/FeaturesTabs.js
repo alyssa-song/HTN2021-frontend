@@ -20,32 +20,34 @@ class FeaturesTabs extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { chartData:{}};
-    // day: [], week: [], month: [], year: []
+    this.state = { day: [], week: [] };
+    // , , month: [], year: []
   }
 
   componentDidMount() {
-    // make requests and store
-    axios.get('http://127.0.0.1:8000/api/messages/420')
+      axios.get('http://127.0.0.1:8000/api/gethour/boon')
       .then(res => {
-        this.setState({ chartData: res.data });
-        console.log(JSON.stringify(res));
+        var arr = [];
+        for (let i = 0; i < res.data.length; i++) {
+          arr[i] = res.data[i].average_score
+          this.setState({ day: arr });
+        }        
       }).catch(function (error) {
           console.log(error);
       })
-    /*
-      axios.get('http://127.0.0.1:8000/api/messages/420/day')
+      
+      axios.get('http://127.0.0.1:8000/api/getdayweek/boon')
       .then(res => {
-        this.setState({ day: res.data });
+        var arr = [];
+        for (let i = 0; i < res.data.length; i++) {
+          arr[i] = res.data[i].average_score
+          this.setState({ week: arr });
+        }  
       }).catch(function (error) {
           console.log(error);
       })
-      axios.get('http://127.0.0.1:8000/api/messages/420/week')
-      .then(res => {
-        this.setState({ week: res.data });
-      }).catch(function (error) {
-          console.log(error);
-      })
+
+      /*
       axios.get('http://127.0.0.1:8000/api/messages/420/month')
       .then(res => {
         this.setState({ month: res.data });
@@ -58,7 +60,7 @@ class FeaturesTabs extends React.Component {
       }).catch(function (error) {
           console.log(error);
       })
-    */
+      */
   }
 
   render() {
@@ -99,10 +101,17 @@ class FeaturesTabs extends React.Component {
         datasets: [
           {
             label: "Sentiment over time",
-            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3], //this.state.day,
+            data: this.state.day,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
+          },
+          {
+            label: "",
+            data: [-1, 1], // this.state.year,
+            borderWidth: 0,
+            fill: false,
+            borderColor: "white"
           }
         ]
       };
@@ -121,10 +130,17 @@ class FeaturesTabs extends React.Component {
         datasets: [
           {
             label: "Sentiment over time",
-            data: [12, 19, 3, 5, 2, 3], //this.state.week,
+            data: this.state.week,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
+          },
+          {
+            label: "",
+            data: [-1, 1], 
+            borderWidth: 0,
+            fill: false,
+            borderColor: "white"
           }
         ]
       };
@@ -146,10 +162,17 @@ class FeaturesTabs extends React.Component {
         datasets: [
           {
             label: "Sentiment over time",
-            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3], //this.state.month,
+            data: [0.24, 0.111, 0.16, -0.01, 0.07, -0.15, 0.01, 0.06, 0.13, 0.03, -0.05, -0.12, 0.07, 0.19, 0.18, 0.12], //this.state.month,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
+          },
+          {
+            label: "",
+            data: [-1, 1], // this.state.year,
+            borderWidth: 0,
+            fill: false,
+            borderColor: "white"
           }
         ]
       };
@@ -165,10 +188,17 @@ class FeaturesTabs extends React.Component {
         datasets: [
           {
             label: "Sentiment over time",
-            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3], // this.state.year,
+            data: [0.13, 0.151, 0.05, -0.08, -0.01, -0.04, 0.12, 0.23, 0.13, 0.02, 0.05, 0.06], // this.state.year,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
+          },
+          {
+            label: "",
+            data: [-1, 1], // this.state.year,
+            borderWidth: 0,
+            fill: false,
+            borderColor: "white"
           }
         ]
       };
@@ -179,6 +209,7 @@ class FeaturesTabs extends React.Component {
         {...props}
         className={outerClasses}
       >
+
         <div className="container">
           <div className={innerClasses}>
             <SectionHeader data={sectionHeader} className="center-content" />

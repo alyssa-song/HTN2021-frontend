@@ -79,14 +79,14 @@ class FeaturesSplit extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'Your Most Used Words'
+      title: 'Most Used Words'
     };
 
     const topPositive = canvas => {
       const ctx = canvas.getContext("2d");
       const gradient = ctx.createLinearGradient(0, 0, 100, 0);
       const str = this.state.pos;
-      const posWords = str.toString().substring(1, str.length - 2).split(',');
+      const posWords = str.toString().substring(1, str.length - 2).split(',', 5);
       return {
         backgroundColor: gradient,
         labels: posWords,
@@ -102,11 +102,11 @@ class FeaturesSplit extends React.Component {
     const topNegative = canvas => {
       const ctx = canvas.getContext("2d");
       const gradient = ctx.createLinearGradient(0, 0, 100, 0);
-      const str = this.state.neg;
-      const negWords = str.toString().substring(1, str.length - 2).split(',');
+      //const str = this.state.neg;
+      //const negWords = str.toString().substring(1, str.length - 2).split(',', 5);
       return {
         backgroundColor: gradient,
-        labels: negWords,
+        labels: ['"no":-0.29', '"bad.": -0.5423','"miss": -0.1531', '"sad": -0.4767', '"confused": -0.3182'],
         datasets: [{
           label: 'negative words',
           data: [12, 10, 8, 6, 4],
@@ -127,7 +127,7 @@ class FeaturesSplit extends React.Component {
             <div className={splitClasses}>
               <div className="split-item">
                 <div className="split-item-content center-content-mobile">
-                  <Bar data={topPositive} />
+                  <Bar data={topPositive}/>
                 </div>
                 <div className={
                   classNames(
