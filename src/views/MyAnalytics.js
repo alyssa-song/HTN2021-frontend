@@ -7,7 +7,7 @@ class MyAnalytics extends React.Component {
     return (
       <React.Fragment>
         <FeaturesTabs topDivider bottomOuterDivider />
-        <FeaturesSplit invertMobile imageFill topDivider />
+        <FeaturesSplit topDivider />
       </React.Fragment >
     );
   }

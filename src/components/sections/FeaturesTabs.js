@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {Line} from 'react-chartjs-2'
 import classNames from 'classnames';
 import { SectionProps } from '../../utils/SectionProps';
@@ -16,6 +17,49 @@ const defaultProps = {
 }
 
 class FeaturesTabs extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { chartData:{}};
+    // day: [], week: [], month: [], year: []
+  }
+
+  componentDidMount() {
+    // make requests and store
+    axios.get('http://127.0.0.1:8000/api/messages/420')
+      .then(res => {
+        this.setState({ chartData: res.data });
+        console.log(JSON.stringify(res));
+      }).catch(function (error) {
+          console.log(error);
+      })
+    /*
+      axios.get('http://127.0.0.1:8000/api/messages/420/day')
+      .then(res => {
+        this.setState({ day: res.data });
+      }).catch(function (error) {
+          console.log(error);
+      })
+      axios.get('http://127.0.0.1:8000/api/messages/420/week')
+      .then(res => {
+        this.setState({ week: res.data });
+      }).catch(function (error) {
+          console.log(error);
+      })
+      axios.get('http://127.0.0.1:8000/api/messages/420/month')
+      .then(res => {
+        this.setState({ month: res.data });
+      }).catch(function (error) {
+          console.log(error);
+      })
+      axios.get('http://127.0.0.1:8000/api/messages/420/year')
+      .then(res => {
+        this.setState({ year: res.data });
+      }).catch(function (error) {
+          console.log(error);
+      })
+    */
+  }
 
   render() {
 
@@ -37,8 +81,8 @@ class FeaturesTabs extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'Features',
-      paragraph: 'Here are some features we have.'
+      title: 'Sentiments',
+      paragraph: JSON.stringify(this.state.chartData)
     };
 
     const startDate = new Date();
@@ -54,8 +98,8 @@ class FeaturesTabs extends React.Component {
         labels,
         datasets: [
           {
-            label: "",
-            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3],
+            label: "Sentiment over time",
+            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3], //this.state.day,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
@@ -76,8 +120,8 @@ class FeaturesTabs extends React.Component {
         labels,
         datasets: [
           {
-            label: "",
-            data: [12, 19, 3, 5, 2, 3],
+            label: "Sentiment over time",
+            data: [12, 19, 3, 5, 2, 3], //this.state.week,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
@@ -101,8 +145,8 @@ class FeaturesTabs extends React.Component {
         labels,
         datasets: [
           {
-            label: "",
-            data: [12, 19, 3, 5, 2, 3],
+            label: "Sentiment over time",
+            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3], //this.state.month,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"
@@ -120,8 +164,8 @@ class FeaturesTabs extends React.Component {
         labels,
         datasets: [
           {
-            label: "",
-            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3],
+            label: "Sentiment over time",
+            data: [1, 0.4, 0.3, -0.5, 0.2, -0.3], // this.state.year,
             borderWidth: 3,
             fill: false,
             borderColor: "#2174ea"

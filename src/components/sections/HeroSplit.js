@@ -101,7 +101,8 @@ class HeroSplit extends React.Component {
                     Dasamood
                   </h1>
                   <p className="mt-0 mb-32">
-                    Here is a description of our project. 
+                    Dasamood is the discord bot who can analyze and track your sentiments over time through your messages.
+                    Sign up and connect your account to find your results in MyAnalytics. 
                   </p>
                   <ButtonGroup>
                     <Button color="primary" wideMobile onClick={() => { openNetlifyModal() }}>Sign up / Sign in</Button>                

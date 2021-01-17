@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
+import {Bar} from 'react-chartjs-2'
 import { SectionSplitProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
-import Image from '../elements/Image';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -54,8 +54,37 @@ class FeaturesSplit extends React.Component {
     );
 
     const sectionHeader = {
-      title: 'Most Used Words',
-      paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
+      title: 'Your Most Used Words'
+    };
+
+    const topPositive = canvas => {
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      return {
+        backgroundColor: gradient,
+        labels: ['#1', '#2', '#3', '#4', '#5'],
+        datasets: [{
+          label: 'positive words',
+          data: [22, 19, 13, 12, 10],
+          borderWidth: 1,
+          backgroundColor: ['#2174ea', '#2174ea', '#2174ea', '#2174ea', '#2174ea']
+        }]
+      };
+    };
+
+    const topNegative = canvas => {
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 100, 0);
+      return {
+        backgroundColor: gradient,
+        labels: ['#1', '#2', '#3', '#4', '#5'],
+        datasets: [{
+          label: 'negative words',
+          data: [30, 10, 8, 3, 2],
+          borderWidth: 1,
+          backgroundColor: ['#041f3d', '#041f3d', '#041f3d', '#041f3d', '#041f3d']
+        }]
+      };
     };
 
     return (
@@ -69,12 +98,7 @@ class FeaturesSplit extends React.Component {
             <div className={splitClasses}>
               <div className="split-item">
                 <div className="split-item-content center-content-mobile">
-                  <h3 className="mt-0 mb-16 reveal-from-bottom" data-reveal-container=".split-item">
-                    Data-driven insights
-                  </h3>
-                  <p className="m-0 reveal-from-bottom" data-reveal-delay="100" data-reveal-container=".split-item">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
+                  <Bar data={topPositive} />
                 </div>
                 <div className={
                   classNames(
@@ -83,12 +107,7 @@ class FeaturesSplit extends React.Component {
                   )}
                   data-reveal-container=".split-item"
                   data-reveal-delay="200">
-                  <Image
-                    className="has-shadow"
-                    src={require('./../../assets/images/features-split-image-02.png')}
-                    alt="Features split 02"
-                    width={528}
-                    height={396} />
+                  <Bar data={topNegative} />
                 </div>
               </div>
             </div>
